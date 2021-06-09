@@ -3,14 +3,12 @@ const Client = new Discord.Client();
 const fs = require('fs');
 Client.commands = new Discord.Collection();
 Client.configFile = JSON.parse(fs.readFileSync('./appconfig.json', 'utf8'));
-const CommandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
-for (const file of CommandFiles) {
-
+for (const file of commandFiles) {
     const command = require(`./commands/${file}`);
 
     Client.commands.set(command.name, command);
-
 }
 
 Client.on('message', message => {
@@ -23,14 +21,15 @@ Client.on('message', message => {
 
     const args = message.content.slice(Client.prefix.lenght).split(/ +/);
     var command = args.shift().toLowerCase();
+    console.log(command);
 
     try {
-        
+
         Client.commands.get(command).execute(message, args, Client);
 
     } catch (error) {
 
-        message.channel.send("Przykro mi ale nie znam takiej komendy. Jeśli chcesz zobaczyć moją liste komend wpisz d/komendy.");
+        message.channel.send(`Przykro mi ale nie znam takiej komendy. Jeśli chcesz zobaczyć moją liste komend wpisz ${Client.prefix}komendy.`);
 
         console.log(error);
     }
