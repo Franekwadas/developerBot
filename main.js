@@ -21,7 +21,19 @@ Client.on('message', message => {
 
     if (!message.content.startsWith(Client.prefix) || message.author.bot) return;
 
-    
+    const args = message.content.slice(Client.prefix.lenght).split(/ +/);
+    var command = args.shift().toLowerCase();
+
+    try {
+        
+        Client.commands.get(command).execute(message, args, Client);
+
+    } catch (error) {
+
+        message.channel.send("Przykro mi ale nie znam takiej komendy. Jeśli chcesz zobaczyć moją liste komend wpisz d/komendy.");
+
+        console.log(error);
+    }
 })
 
 
