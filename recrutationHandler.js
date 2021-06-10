@@ -10,7 +10,7 @@ module.exports = (message, client) => {
     console.log(messageFetched);
     let lines = messageFetched.content.split("\n");
 
-    lines.forEach(l => lines[lines.indexOf(l)] = lines.split(": "));
+    lines.forEach(l => lines[lines.indexOf(l)] = l.split(": "));
 
     var name, age, why, interests, gameExperience;
 
