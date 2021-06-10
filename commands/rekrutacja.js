@@ -1,15 +1,8 @@
-const Discord = require('discord.js');
-const Client = new Discord.Client();
-const fs = require('fs');
-Client.configFile = JSON.parse(fs.readFileSync('./appconfig.json', 'utf8'));
-
-const config = Client.configFile.find(p => p.guildId == "852199893627437158");
-
-Client.prefix = config.prefix;
+const Discord = require('discord.js')
 
 module.exports = {
 
-    "name": `${Client.prefix}rekrutacja`,
+    "name": `rekrutacja`,
     "description": "Rekrutacja gracza",
 
     async execute(message, args, client) {

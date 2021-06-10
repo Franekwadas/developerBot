@@ -19,7 +19,7 @@ Client.on('message', message => {
 
     if (!message.content.startsWith(Client.prefix) || message.author.bot) return;
 
-    const args = message.content.slice(Client.prefix.lenght).split(/ +/);
+    const args = message.content.slice(Client.prefix.length).split(/ +/);
     var command = args.shift().toLowerCase();
     console.log(command);
 
