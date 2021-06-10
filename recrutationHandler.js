@@ -78,7 +78,8 @@ module.exports = (message, client) => {
     var embed = new MessageEmbed()
     .setColor('#b8860b')
     .setTitle("Twój wniosek rekrutacyjny oczekuje na sprawdzenie!")
-    .setDescription("Za niedługo ktoś z administracji sprawdzi twój wniosek!");
+    .setDescription("Za niedługo ktoś z administracji sprawdzi twój wniosek!")
+    .setFooter("Ten kanał zostanie usunięty za 20 sekund.");
 
     embed.addField("Twój nick", `<@${message.author.id}>`, false);
     embed.addField("Twoje imię", `${name}`, false);
@@ -90,4 +91,8 @@ module.exports = (message, client) => {
     message.channel.send(embed);
 
     client.reloadConfig();
+
+    setTimeout(() => {
+        message.channel.delete();
+    }, 20000);
 }
