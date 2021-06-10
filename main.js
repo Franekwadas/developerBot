@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const Client = new Discord.Client();
 const fs = require('fs');
+const recrutationHandler = require('./recrutationHandler');
 Client.commands = new Discord.Collection();
 Client.configFile = JSON.parse(fs.readFileSync('./appconfig.json', 'utf8'));
 Client.acctualRekru = JSON.parse(fs.readFileSync('./AcctualRekru.json', 'utf8'));
@@ -17,6 +18,11 @@ Client.on('message', message => {
     const config = Client.configFile.find(p => p.guildId == message.guild.id);
 
     Client.prefix = config.prefix;
+
+    if (!message.content.startsWith(Client.prefix) && !message.author.bot) {
+        recrutationHandler(message, Client);
+        return;
+    }
 
     if (!message.content.startsWith(Client.prefix) || message.author.bot) return;
 
