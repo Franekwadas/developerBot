@@ -7,13 +7,13 @@ module.exports = (message, client) => {
 
     var ifThisPlayerIsUserOfThisServer = acctualRekruFile.waitingForCheck.find(u => u.userId == message.author.id) 
     
-    
+    if (typeof thisRecrutation === 'undefined') return;
+
     if (typeof ifThisPlayerIsUserOfThisServer !== 'undefined'){
         message.channel.send("Już wysłałeś jeden wniosek!");
         return;
     }
 
-    if (typeof thisRecrutation === 'undefined') return;
     
     const messageFetched = message;
 
