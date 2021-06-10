@@ -39,9 +39,14 @@ module.exports = {
                 return;
             }
 
-            var player = message.guild.members.cache.get(id)
+            var player = message.guild.members.cache.get(id);
 
             if (typeof player !== 'undefined') {
+
+                if (player.user.bot) {
+                    message.channel.send("Nie możesz rekrutować bota!");
+                    return;
+                }
 
                 const Channel = await message.guild.channels.create(`Rekrutacja użytkownika ${player.user.username}`);
 

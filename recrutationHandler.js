@@ -18,6 +18,8 @@ module.exports = (message, client) => {
     try {
         if (lines.length != 5) throw new Error("Za mało pól!");
 
+        if (message.author.id != thisRecrutation.userId) throw new Error("Administratorze, nie rekrutujemy Ciebie :)");
+
         let nameLine = lines.find(l => ["jak masz na imię", "jak masz na imie"].includes(l[0].toLowerCase()));
 
         if (typeof nameLine === 'undefined') throw new Error("Nie podałeś swojego imienia!");
@@ -58,6 +60,10 @@ module.exports = (message, client) => {
         return;
     }
 
+    var araj = ["d", "d"];
+
+    araj.splice
+
     acctualRekruFile.waitingForCheck.push({
         "userId": message.author.id,
         "name": name,
@@ -66,6 +72,8 @@ module.exports = (message, client) => {
         "interests": interests,
         "gameExperience": gameExperience
     });
+
+    acctualRekruFile.acctualRekrutation.splice(acctualRekruFile.acctualRekrutation.indexOf(thisRecrutation), 1);
 
     var embed = new MessageEmbed()
     .setColor('#b8860b')
@@ -80,4 +88,6 @@ module.exports = (message, client) => {
     embed.addField("Twoje doświadczenie w grach", `${gameExperience}`, false);
 
     message.channel.send(embed);
+
+    client.reloadConfig();
 }

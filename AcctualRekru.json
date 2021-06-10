@@ -1,12 +1,16 @@
 [
     {
         "guildId": "852199893627437158",
-        "acctualRekrutation": [
+        "acctualRekrutation": [],
+        "waitingForCheck": [
             {
                 "userId": "514138172070952961",
-                "channelId": "852564058620035102"
+                "name": "nie wiem",
+                "age": 14,
+                "why": "bo fajny jestem",
+                "interests": "piłka nożna, piłka nożna i piłka nożna",
+                "gameExperience": "grałem w cs go u kolegi"
             }
-        ],
-        "waitingForCheck": []
+        ]
     }
 ]
