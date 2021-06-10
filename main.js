@@ -36,5 +36,17 @@ Client.on('message', message => {
     }
 })
 
+Client.reloadConfig = () => {
+
+    try {
+        var acctualRekru = Client.acctualRekru;
+    } catch (error) {
+      console.error(error);
+    }
+
+    fs.writeFileSync('./acctualRekru.json', JSON.stringify(acctualRekru));
+
+}
+
 
 Client.login('ODQ5OTIyNTM1MzIzNzI5OTYw.YLiOCw.wLGDLv7IH5Lw_ox4EbTTmTmDRDI');
