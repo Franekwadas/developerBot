@@ -40,7 +40,7 @@ module.exports = {
                 var embed = new Discord.MessageEmbed()
                 .setColor('#34c6eb')
                 .setTitle(`Witaj ${player.user.username}`)
-                .setDescription(`**Napisz podanie w takim formacie: \n\nJak masz na imię: \nIle masz lat: \nDlaczego mielibyśmy ciebie wybrać?: \nJakie są twoje zainteresowania: \nJakie masz doświadczenie w grach?: \n\n\nPrzykładowe podanie:\n\n Jak masz na imię: maciek\nIle masz lat: 10\nDlaczego mielibyśmy ciebie wybrać?: Bo tak\nJakie są twoje zainteresowania: Nie wiem a twoje?\nJakie masz doświadczenie w grach: W czym?**`)
+                .setDescription(`**Napisz podanie w takim formacie: \n\nJak masz na imię: \nIle masz lat: \nDlaczego mielibyśmy ciebie wybrać?: \nJakie są twoje zainteresowania: \nJakie masz doświadczenie w grach?: \n\nPrzykładowe podanie:\n\n Jak masz na imię: maciek\nIle masz lat: 10\nDlaczego mielibyśmy ciebie wybrać?: Bo tak\nJakie są twoje zainteresowania: Nie wiem a twoje?\nJakie masz doświadczenie w grach: W czym?**`)
                 .setFooter("Polecam się na przyszłość :)");
 
                 await Channel.send(embed);
