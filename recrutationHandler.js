@@ -1,3 +1,5 @@
+const { MessageEmbed } = require("discord.js");
+
 module.exports = (message, client) => {
     var acctualRekruFile = client.acctualRekru.find(g => g.guildId == message.guild.id);
     
@@ -56,5 +58,26 @@ module.exports = (message, client) => {
         return;
     }
 
-    message.channel.send("POTRZEBUJEMY CIE W NASZYM SKŁADZIE");
+    acctualRekruFile.waitingForCheck.push({
+        "userId": message.author.id,
+        "name": name,
+        "age": age,
+        "why": why,
+        "interests": interests,
+        "gameExperience": gameExperience
+    });
+
+    var embed = new MessageEmbed()
+    .setColor('#b8860b')
+    .setTitle("Twój wniosek rekrutacyjny oczekuje na sprawdzenie!")
+    .setDescription("Za niedługo ktoś z administracji sprawdzi twój wniosek!");
+
+    embed.addField("Twój nick", `<@${message.author.id}>`, false);
+    embed.addField("Twoje imię", `${name}`, false);
+    embed.addField("Twój wiek", `${age}`, false);
+    embed.addField("Dlaczego chcesz do nas dołączyć?", `${why}`, false);
+    embed.addField("Twoje zainteresowania", `${interests}`, false);
+    embed.addField("Twoje doświadczenie w grach", `${gameExperience}`, false);
+
+    message.channel.send(embed);
 }
