@@ -1,5 +1,4 @@
 const Discord = require('discord.js')
-
 module.exports = {
 
     "name": `rekrutacja`,
@@ -53,6 +52,8 @@ module.exports = {
                 });
 
                 await Channel.send(embed);
+
+                client.reloadConfig();
 
             } else {
                 message.channel.send("Podaj prawidłowe ID gracza!");

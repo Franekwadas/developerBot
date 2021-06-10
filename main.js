@@ -33,6 +33,9 @@ Client.on('message', message => {
 
         console.log(error);
     }
+
+    Client.reloadConfig();
+    
 })
 
 Client.reloadConfig = () => {
