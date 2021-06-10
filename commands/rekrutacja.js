@@ -13,8 +13,6 @@ module.exports = {
             return;
         }
 
-        
-
         var hasPermission = false;
 
         config.moderatorRoles.forEach(role => {
@@ -68,7 +66,8 @@ module.exports = {
 
                 acctualRekruFile.acctualRekrutation.push({
 
-                    "userId": id
+                    "userId": id,
+                    "channelId": Channel.id
 
                 });
 
