@@ -32,6 +32,8 @@ module.exports = (message, client) => {
 
         if (age >= 130) throw new Error("Na pewno nie jesteś aż tak stary!");
 
+        if (age < 13) throw new Error("Nie przyjmujemy osób poniżej 13 roku życia!");
+
         let whyLine = lines.find(l => ["dlaczego mielibyśmy ciebie wybrać?", "dlaczego mielibysmy ciebie wybrac?", "dlaczego mielibyśmy ciebie wybrać", "dlaczego mielibysmy ciebie wybrac"].includes(l[0].toLowerCase()));
 
         if (typeof whyLine === 'undefined') throw new Error("Musisz nam wskazać powody, aby Ciebie wybrać!");
