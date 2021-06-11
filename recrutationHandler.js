@@ -68,10 +68,6 @@ module.exports = (message, client) => {
         return;
     }
 
-    var araj = ["d", "d"];
-
-    araj.splice
-
     acctualRekruFile.waitingForCheck.push({
         "userId": message.author.id,
         "name": name,
@@ -79,8 +75,10 @@ module.exports = (message, client) => {
         "why": why,
         "interests": interests,
         "gameExperience": gameExperience,
-        "id": acctualRekruFile.nextId+1
+        "id": acctualRekruFile.nextId
     });
+
+    acctualRekruFile.nextId = (parseInt(acctualRekruFile.nextId) + 1).toString();
 
     acctualRekruFile.acctualRekrutation.splice(acctualRekruFile.acctualRekrutation.indexOf(thisRecrutation), 1);
 
