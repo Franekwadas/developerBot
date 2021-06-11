@@ -75,7 +75,8 @@ module.exports = (message, client) => {
         "why": why,
         "interests": interests,
         "gameExperience": gameExperience,
-        "id": acctualRekruFile.nextId
+        "id": acctualRekruFile.nextId,
+        "showAtWnioski": true
     });
 
     acctualRekruFile.nextId = (parseInt(acctualRekruFile.nextId) + 1).toString();

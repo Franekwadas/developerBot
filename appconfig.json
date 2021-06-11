@@ -3,6 +3,8 @@
         "guildId": "852199893627437158",
         "prefix": "d/",
         "channelForRekrutation": "852894771206684703",
+        "normalGuildMemberRole": "852633002873978891",
+        "rekrutationRole": "852214672513826867",
         "moderatorRoles": [
             "852553919447957534",
             "852207217397727282"

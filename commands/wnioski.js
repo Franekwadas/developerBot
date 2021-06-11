@@ -47,8 +47,10 @@ module.exports = {
 
             for (let i = 0; i < acctualRekruFile.waitingForCheck.length; i++) {
                 podanie = acctualRekruFile.waitingForCheck.find(p => parseInt(p.id) == i+1);
-                embed.addField(`Wniosek numer  ${i+1}`, `Podanie gracza: <@${podanie.userId}>\nImie: ${podanie.name}\nWiek: ${podanie.age}\nDlaczego mielibyście go wybrać?: ${podanie.why}\nZainteresowania: ${podanie.interests}\nJego doświadczenie w grach: ${podanie.gameExperience}` , false);
-                anyRekrutationExist = true;
+                if (podanie.showAtWnioski == true){
+                    embed.addField(`Wniosek numer  ${i+1}`, `Podanie gracza: <@${podanie.userId}>\nImie: ${podanie.name}\nWiek: ${podanie.age}\nDlaczego mielibyście go wybrać?: ${podanie.why}\nZainteresowania: ${podanie.interests}\nJego doświadczenie w grach: ${podanie.gameExperience}` , false);
+                    anyRekrutationExist = true;
+                }   
             }
 
             if (anyRekrutationExist == false) {
