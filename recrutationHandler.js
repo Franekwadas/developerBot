@@ -78,7 +78,8 @@ module.exports = (message, client) => {
         "age": age,
         "why": why,
         "interests": interests,
-        "gameExperience": gameExperience
+        "gameExperience": gameExperience,
+        "id": acctualRekruFile.nextId+1
     });
 
     acctualRekruFile.acctualRekrutation.splice(acctualRekruFile.acctualRekrutation.indexOf(thisRecrutation), 1);
