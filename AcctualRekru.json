@@ -1,7 +1,12 @@
 [
     {
         "guildId": "852199893627437158",
-        "acctualRekrutation": [],
+        "acctualRekrutation": [
+            {
+                "userId": "602587694249279491",
+                "channelId": "852572860387426314"
+            }
+        ],
         "waitingForCheck": [
             {
                 "userId": "514138172070952961",
