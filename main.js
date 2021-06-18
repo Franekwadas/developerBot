@@ -18,6 +18,115 @@ Client.on('message', message => {
 
     const config = Client.configFile.find(p => p.guildId == message.guild.id);
 
+    if(message.member.permissions.has('MANAGE_GUILD')) {
+        if (message.content == "DeveloperBotSetup" && typeof config === 'undefined' && !message.author.bot) {
+
+            Client.configFile.push({
+
+                "guildId": message.guild.id,
+                "prefix": "d/",
+                "channelForRekrutation": "",
+                "normalGuildMemberRole": "",
+                "rekrutationRole": "",
+                "moderatorRoles": [],
+                "inConfiguration": true,
+                "setingModeratorRoles": false
+
+            })
+
+            message.channel.send("Spinguj lub podaj id kanału na którym administratorzy będą przeprowadzać rekrutacje komendą d/rekrutacja");
+
+            return;
+        }
+
+        if (message.content == "koniec") {
+            if (config.setingModeratorRoles == true) {
+
+                message.channel.send("Pomyślnie zakończono konfigurację bota!")
+                config.inConfiguration = false;
+
+            }
+        }
+
+        if (config.inConfiguration == true) {
+
+            if (typeof config.channelForRekrutation === 'undefined') {
+
+                if (!isNaN(message.content.replace(/<#>/, ""))) {
+
+                    if (typeof message.guild.channel.cache.get(message.content.replace(/<#>/, "") !== 'undefined')) {
+
+                        config.channelForRekrutation = message.content.replace(/<#>/, "");
+
+                        message.channel.send("Teraz zpinguj role którą ma każdy normalny użytkownik (np. @👱‍♂️Member)");
+
+                    } else {
+                        message.channel.send("Spinguj lub podaj prawidłowe id kanału!");
+                    }
+
+                } else {
+                    message.channel.send("Spinguj lub podaj prawidłowe id kanału!");
+                }
+
+            } else if (typeof config.normalGuildMemberRole === 'undefined') {
+
+                if (!isNaN(message.content.replace(/<@&>/, ""))) {
+
+                    if (typeof message.guild.roles.cache.get(message.content.replace(/<@&>/, "") !== 'undefined')) {
+
+                        config.normalGuildMemberRole = message.content.replace(/<@&>/, "");
+
+                        message.channel.send("Teraz zpinguj role którą ma każdy rekrutant (np. @🎭Rekrutant)");
+
+                    } else {
+                        message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                    }
+
+                } else {
+                    message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                }
+
+            } else if (typeof config.rekrutationRole === 'undefined') {
+
+                if (!isNaN(message.content.replace(/<@&>/, ""))) {
+
+                    if (typeof message.guild.roles.cache.get(message.content.replace(/<@&>/, "") !== 'undefined')) {
+
+                        config.rekrutationRole = message.content.replace(/<@&>/, "");
+                        config.setingModeratorRoles = true;
+
+                        message.channel.send("Teraz zpinguj **POJEDYŃCZO** role moderatorskie, a jak skończysz wpisz 'koniec'");
+
+                    } else {
+                        message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                    }
+
+                } else {
+                    message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                }
+
+            } else if (config.setingModeratorRoles == true) {
+
+                if (!isNaN(message.content.replace(/<@&>/, ""))) {
+
+                    if (typeof message.guild.roles.cache.get(message.content.replace(/<@&>/, "") !== 'undefined')) {
+
+                        config.moderatorRoles = config.moderatorRoles.push(message.content.replace(/<@&>/, ""));
+
+                        message.channel.send("Dodano do ról moderatorskich!");
+
+                    } else {
+                        message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                    }
+
+                } else {
+                    message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                }
+
+            }
+        }
+        return;
+    }
     Client.prefix = config.prefix;
 
     if (!message.content.startsWith(Client.prefix) && !message.author.bot) {
