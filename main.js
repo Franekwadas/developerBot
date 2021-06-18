@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const keepAlive = require('./server');
 const Client = new Discord.Client();
 const fs = require('fs');
 const recrutationHandler = require('./recrutationHandler');
@@ -56,5 +57,5 @@ Client.reloadConfig = () => {
 
 }
 
-
-Client.login('ODQ5OTIyNTM1MzIzNzI5OTYw.YLiOCw.wLGDLv7IH5Lw_ox4EbTTmTmDRDI');
+keepAlive();
+Client.login(process.env['TOKEN']);
