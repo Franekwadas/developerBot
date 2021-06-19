@@ -24,10 +24,7 @@ Client.once('ready', () => {
   console.log(`🔧・Author: ${package.author}`);
   console.log(`[==-----------------------------==]`);
 
-  Client.user.setActivity("Prefix: d/", {
-    type: "LISTENING",
-    url: "https://www.youtube.com/channel/UC7s7xhvp0aIrEPdXF-s88fA/videos"
-  });
+  Client.user.setActivity("Prefix: d/", "LISTENING");
   
 
 })
