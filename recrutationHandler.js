@@ -3,6 +3,19 @@ const { MessageEmbed } = require("discord.js");
 module.exports = (message, client) => {
     var acctualRekruFile = client.acctualRekru.find(g => g.guildId == message.guild.id);
     
+    if (typeof acctualRekruFile === 'undefined') {
+
+      client.acctualRekru.push({
+        "guildId": message.guild.id,
+        "nextId": 1,
+        "acctualRekrutation": [],
+        "waitingForCheck": []
+      })
+
+      client.reloadConfig();
+
+    }
+
     var thisRecrutation = acctualRekruFile.acctualRekrutation.find(r => r.channelId == message.channel.id);
 
     var ifThisPlayerIsUserOfThisServer = acctualRekruFile.waitingForCheck.find(u => u.userId == message.author.id) 
