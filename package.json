@@ -1,7 +1,7 @@
 {
   "name": "nowy-folder",
   "version": "1.0.0",
-  "description": "",
+  "description": "Discord bot do pomocy z zarządzaniem serwera",
   "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

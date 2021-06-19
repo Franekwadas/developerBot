@@ -6,6 +6,7 @@ const recrutationHandler = require('./recrutationHandler');
 Client.commands = new Discord.Collection();
 Client.configFile = JSON.parse(fs.readFileSync('./appconfig.json', 'utf8'));
 Client.acctualRekru = JSON.parse(fs.readFileSync('./AcctualRekru.json', 'utf8'));
+Client.package = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -17,7 +18,11 @@ for (const file of commandFiles) {
 Client.once('ready', () => {
 
   Client.reloadConfig();
-  console.log("Jm here misterio amiozo");
+  console.log("[==---------Running bot---------==]");
+  console.log("🤖・Application id: 849922535323729960");
+  console.log(`📊・Version: ${package.version}`);
+  console.log(`🔧・Author: ${package.author}`);
+  console.log(`[==-----------------------------==]`);
 
 })
 
