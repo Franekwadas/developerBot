@@ -20,8 +20,8 @@ Client.once('ready', () => {
   Client.reloadConfig();
   console.log("[==---------Running bot---------==]");
   console.log("🤖・Application id: 849922535323729960");
-  console.log(`📊・Version: ${package.version}`);
-  console.log(`🔧・Author: ${package.author}`);
+  console.log(`📊・Version: ${Client.package.version}`);
+  console.log(`🔧・Author: ${Client.package.author}`);
   console.log(`[==-----------------------------==]`);
 
   Client.user.setActivity("Prefix: d/", "LISTENING");
