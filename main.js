@@ -33,6 +33,9 @@ Client.on('message', async message => {
 
     if (message.author.bot) return;
     if (message.channel.type == "dm") return;
+
+    Client.config = Client.configFile.find(g => g.guildId == message.guild.id);
+
     if (message.member.permissions.has('MANAGE_GUILD')) {
       if (message.content.toLowerCase() == "developerbotsetup" && typeof  Client.config === 'undefined' && !message.author.bot) {
 
