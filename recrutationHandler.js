@@ -1,6 +1,9 @@
 const { MessageEmbed } = require("discord.js");
 
 module.exports = (message, client) => {
+
+    if (typeof client.config === 'undefined') return;
+
     var acctualRekruFile = client.acctualRekru.find(g => g.guildId == message.guild.id);
     
     if (typeof acctualRekruFile === 'undefined') {
