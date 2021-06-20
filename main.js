@@ -216,7 +216,7 @@ Client.on('message', async message => {
     
 
     Client.config = Client.configFile.find(p => p.guildId == message.guild.id);
-    if (typeof Client.prefix !== 'undefined') {
+    if (typeof Client.config !== 'undefined') {
       Client.prefix = Client.config.prefix;
     } else {
       return;
