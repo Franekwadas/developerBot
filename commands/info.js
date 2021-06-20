@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 module.exports = {
-    "name": "info",
+    "name": "info ",
     "description": "Komenda wypisuje krótką informację o bocie.",
     execute(message, args, client) {
 
@@ -16,7 +16,7 @@ module.exports = {
                 infoEmbed.addField(client.prefix + command[0], command[1].description, false);
             }
         } else {
-            var description = `Nazywam się **DeveloperBOT**. Zostałem stworzony przez gracza, zwanego **Otptrashuo**, z tagiem **X**.\n\n**__Moje aktualne zadania to:__\nRekrutowanie pod komendą ${client.prefix}rekrutacja (o ile to skonfigurowałeś w configu), oraz ogólne zarządzanie serverem.`;
+            var description = `Nazywam się **DeveloperBOT**. Zostałem stworzony przez gracza, zwanego **Otptrashuo**, z tagiem **X**.\n\n**__Moje aktualne zadania to:__**\nRekrutowanie pod komendą ${client.prefix}rekrutacja (o ile to skonfigurowałeś w configu), oraz ogólne zarządzanie serverem.\n\nMój aktualny prefix to: ${client.config.prefix}`;
 
             infoEmbed.setTitle("**Informacje o mnie :smiley:**")
             .setDescription(description);

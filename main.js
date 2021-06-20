@@ -7,6 +7,7 @@ Client.commands = new Discord.Collection();
 Client.configFile = JSON.parse(fs.readFileSync('./appconfig.json', 'utf8'));
 Client.acctualRekru = JSON.parse(fs.readFileSync('./AcctualRekru.json', 'utf8'));
 Client.package = JSON.parse(fs.readFileSync('./package.json', 'utf-8'));
+Client.punishmentsFile = JSON.parse(fs.readFileSync('./punishments.json', 'utf-8'));
 const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -33,6 +34,26 @@ Client.on('message', async message => {
 
     if (message.author.bot) return;
     if (message.channel.type == "dm") return;
+
+    var punishments1 = Client.punishmentsFile.find(g => g.guildId == message.guild.id);
+
+    if (typeof punishments1 === 'undefined') {
+
+        Client.punishmentsFile.push({
+            "guildId": message.guild.id,
+            "mutes": []
+        })
+
+    }
+
+    Client.reloadConfig();
+
+    var punishments = Client.punishmentsFile.find(g => g.guildId == message.guild.id); 
+
+    if (typeof punishments.mutes.find(u => u.userId == message.author.id) !== 'undefined') {
+      message.channel.messages.cache.get(message.id).delete();
+      return;
+    }
 
     Client.config = Client.configFile.find(g => g.guildId == message.guild.id);
 
@@ -265,7 +286,15 @@ Client.reloadConfig = () => {
 
     fs.writeFileSync('./appconfig.json', JSON.stringify(config));
 
+    try {
+      var punishments = Client.punishmentsFile;
+    } catch (error) {
+      console.error(error);
+    }
+
+    fs.writeFileSync('./punishments.json', JSON.stringify(punishments));
 }
 
-keepAlive();
-Client.login(process.env['TOKEN']);
+//keepAlive();
+//Client.login(process.env['TOKEN']);
+Client.login('ODQ5OTIyNTM1MzIzNzI5OTYw.YLiOCw.0B5F3_45jMNkSQBiUCn8RiOpokc');
