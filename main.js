@@ -31,175 +31,168 @@ Client.once('ready', () => {
 
 Client.on('message', message => {
 
+    if (message.member.permissions.has('MANAGE_GUILD')) {
 
-    if (message.content.toLowerCase() == "developerbotsetup" && typeof  Client.config === 'undefined' && !message.author.bot) {
+      if (message.content.toLowerCase() == "developerbotsetup" && typeof  Client.config === 'undefined' && !message.author.bot) {
 
-        Client.configFile.push({
+          Client.configFile.push({
 
-            "guildId": message.guild.id,
-            "prefix": "d/",
-            "channelForRekrutation": "",
-            "normalGuildMemberRole": "",
-            "rekrutationRole": "",
-            "moderatorRoles": [],
-            "inConfiguration": true,
-            "whoConfigurating": message.author.id,
-            "setingModeratorRoles": false,
-            "amountOfNone": 0
+              "guildId": message.guild.id,
+              "prefix": "d/",
+              "channelForRekrutation": "",
+              "normalGuildMemberRole": "",
+              "rekrutationRole": "",
+              "moderatorRoles": [],
+              "inConfiguration": true,
+              "whoConfigurating": message.author.id,
+              "setingModeratorRoles": false,
+              "amountOfNone": 0
 
-        })
+          })
 
-        message.channel.send("Spinguj lub podaj id kanału na którym administratorzy będą przeprowadzać rekrutacje komendą d/rekrutacja");
+          message.channel.send("Spinguj lub podaj id kanału na którym administratorzy będą przeprowadzać rekrutacje komendą d/rekrutacja");
 
-        Client.reloadConfig();
+          Client.reloadConfig();
 
-        if (typeof Client.config === 'undefined' && !message.author.bot) {
-          Client.config = Client.configFile.find(p => p.guildId == message.guild.id);
-        } 
+          if (typeof Client.config === 'undefined' && !message.author.bot) {
+            Client.config = Client.configFile.find(p => p.guildId == message.guild.id);
+          } 
 
-        return;
-    }
-
-    if (typeof Client.config === 'undefined') {
-
-      if (message.member.hasPermission('MENAGE_GUILD')) {
-
-        message.author.send("Witaj przyszedłem poinformować cię o niezkonfigurowanym bocie na serverze: " + message.guild.name);
-        return;
-
+          return;
       }
 
-    }
+      if (typeof Client.config === 'undefined') return;
 
-    if (Client.config.inConfiguration == true && !message.author.bot) {
-        if (message.author.id != Client.config.whoConfigurating) return;
-        if (typeof Client.config.channelForRekrutation === 'undefined' || Client.config.channelForRekrutation == "") {
+      if (Client.config.inConfiguration == true && !message.author.bot) {
+          if (message.author.id != Client.config.whoConfigurating) return;
+          if (typeof Client.config.channelForRekrutation === 'undefined' || Client.config.channelForRekrutation == "") {
 
-            if (message.content == "none") {
-              Client.config.channelForRekrutation = "false";
-              Client.config.amountOfNone = Client.config.amountOfNone + 1;
-              message.channel.send("Teraz zpinguj role którą ma każdy normalny użytkownik (np. @👱‍♂️Member)");
-              return;
-            }
+              if (message.content == "none") {
+                Client.config.channelForRekrutation = "false";
+                Client.config.amountOfNone = Client.config.amountOfNone + 1;
+                message.channel.send("Teraz zpinguj role którą ma każdy normalny użytkownik (np. @👱‍♂️Member)");
+                return;
+              }
 
-            var ChannelId = message.content.replace("<", "");
-            ChannelId = ChannelId.replace("#", "");
-            ChannelId = ChannelId.replace(">", "");
+              var ChannelId = message.content.replace("<", "");
+              ChannelId = ChannelId.replace("#", "");
+              ChannelId = ChannelId.replace(">", "");
 
-            if (!isNaN(ChannelId)) {
+              if (!isNaN(ChannelId)) {
 
-                if (typeof message.guild.channels.cache.get(ChannelId) !== 'undefined') {
+                  if (typeof message.guild.channels.cache.get(ChannelId) !== 'undefined') {
 
-                    Client.config.channelForRekrutation = ChannelId;
+                      Client.config.channelForRekrutation = ChannelId;
 
-                    message.channel.send("Teraz zpinguj role którą ma każdy normalny użytkownik (np. @👱‍♂️Member)");
+                      message.channel.send("Teraz zpinguj role którą ma każdy normalny użytkownik (np. @👱‍♂️Member)");
 
-                } else {
-                    message.channel.send("Spinguj lub podaj prawidłowe id kanału!");
-                }
+                  } else {
+                      message.channel.send("Spinguj lub podaj prawidłowe id kanału!");
+                  }
 
-            } else {
-                message.channel.send("Spinguj lub podaj prawidłowe id kanału!");
-            }
+              } else {
+                  message.channel.send("Spinguj lub podaj prawidłowe id kanału!");
+              }
 
-        } else if (typeof Client.config.normalGuildMemberRole === 'undefined' || Client.config.normalGuildMemberRole == "") {
+          } else if (typeof Client.config.normalGuildMemberRole === 'undefined' || Client.config.normalGuildMemberRole == "") {
 
-            if (message.content == "none") {
-              Client.config.amountOfNone = Client.config.amountOfNone + 1;
-              Client.config.normalGuildMemberRole = "false";
-              message.channel.send("Teraz zpinguj role którą ma każdy rekrutant (np. @🎭Rekrutant)");
-              return;
-            }
+              if (message.content == "none") {
+                Client.config.amountOfNone = Client.config.amountOfNone + 1;
+                Client.config.normalGuildMemberRole = "false";
+                message.channel.send("Teraz zpinguj role którą ma każdy rekrutant (np. @🎭Rekrutant)");
+                return;
+              }
 
-            var RoleId = message.content.slice(3);
-            RoleId = RoleId.replace(">", "");
+              var RoleId = message.content.slice(3);
+              RoleId = RoleId.replace(">", "");
 
-            if (!isNaN(RoleId)) {
+              if (!isNaN(RoleId)) {
 
-                if (typeof message.guild.roles.cache.get(RoleId) !== 'undefined') {
+                  if (typeof message.guild.roles.cache.get(RoleId) !== 'undefined') {
 
-                    Client.config.normalGuildMemberRole = RoleId;
+                      Client.config.normalGuildMemberRole = RoleId;
 
-                    message.channel.send("Teraz zpinguj role którą ma każdy rekrutant (np. @🎭Rekrutant)");
+                      message.channel.send("Teraz zpinguj role którą ma każdy rekrutant (np. @🎭Rekrutant)");
 
-                } else {
-                    message.channel.send("Spinguj lub podaj prawidłowe id roli!");
-                }
+                  } else {
+                      message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                  }
 
-            } else {
-                message.channel.send("Spinguj lub podaj prawidłowe id roli!");
-            }
+              } else {
+                  message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+              }
 
-        } else if (typeof Client.config.rekrutationRole === 'undefined' || Client.config.rekrutationRole == "") {
+          } else if (typeof Client.config.rekrutationRole === 'undefined' || Client.config.rekrutationRole == "") {
 
-            if (message.content == "none") {
-              Client.config.amountOfNone = Client.config.amountOfNone + 1;
-              Client.config.rekrutationRole = "false";
-              message.channel.send("Teraz zpinguj **POJEDYŃCZO** role moderatorskie, a jak skończysz wpisz 'koniec'");
-              Client.config.setingModeratorRoles = true;
-              return;
-            }
+              if (message.content == "none") {
+                Client.config.amountOfNone = Client.config.amountOfNone + 1;
+                Client.config.rekrutationRole = "false";
+                message.channel.send("Teraz zpinguj **POJEDYŃCZO** role moderatorskie, a jak skończysz wpisz 'koniec'");
+                Client.config.setingModeratorRoles = true;
+                return;
+              }
 
-            var RoleId = message.content.slice(3);
-            RoleId = RoleId.replace(">", "");
+              var RoleId = message.content.slice(3);
+              RoleId = RoleId.replace(">", "");
 
-            if (!isNaN(RoleId)) {
+              if (!isNaN(RoleId)) {
 
-                if (typeof message.guild.roles.cache.get(RoleId) !== 'undefined') {
+                  if (typeof message.guild.roles.cache.get(RoleId) !== 'undefined') {
 
-                    Client.config.rekrutationRole = RoleId;
-                    Client.config.setingModeratorRoles = true;
+                      Client.config.rekrutationRole = RoleId;
+                      Client.config.setingModeratorRoles = true;
 
-                    message.channel.send("Teraz zpinguj **POJEDYŃCZO** role moderatorskie, a jak skończysz wpisz 'koniec'");
+                      message.channel.send("Teraz zpinguj **POJEDYŃCZO** role moderatorskie, a jak skończysz wpisz 'koniec'");
 
-                } else {
-                    message.channel.send("Spinguj lub podaj prawidłowe id roli!");
-                }
+                  } else {
+                      message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                  }
 
-            } else {
-                message.channel.send("Spinguj lub podaj prawidłowe id roli!");
-            }
+              } else {
+                  message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+              }
 
-        } else if (Client.config.setingModeratorRoles == true) {
+          } else if (Client.config.setingModeratorRoles == true) {
 
-            Client.prefix = Client.config.prefix;
+              Client.prefix = Client.config.prefix;
 
-            if (message.content == "koniec") {
-              try {
-                if (Client.config.amountOfNone < 3) {
-                  message.channel.send("**Pomyślnie zakończono konfigurację bota!**");
-                } else {
-                  message.channel.send(`**Uwaga**\nPrzy takiej ilości niezdefiniowanych wartości w bocie może dochodzić do różnego rodzaju błędów\nJeżeli chcesz to naprawić użyj komendy ${Client.prefix}resetconfig, a następnie wpisz developerbotsetup`);
+              if (message.content == "koniec") {
+                try {
+                  if (Client.config.amountOfNone < 3) {
+                    message.channel.send("**Pomyślnie zakończono konfigurację bota!**");
+                  } else {
+                    message.channel.send(`**Uwaga**\nPrzy takiej ilości niezdefiniowanych wartości w bocie może dochodzić do różnego rodzaju błędów\nJeżeli chcesz to naprawić użyj komendy ${Client.prefix}resetconfig, a następnie wpisz developerbotsetup`);
+                  }
+                  
+                  Client.config.inConfiguration = false;
+                  Client.config.setingModeratorRoles = false;
+                  return;
+                } catch (error) {
+                  console.error(error);
                 }
                 
-                Client.config.inConfiguration = false;
-                Client.config.setingModeratorRoles = false;
-                return;
-              } catch (error) {
-                console.error(error);
               }
-              
+
+              var RoleId = message.content.slice(3);
+              RoleId = RoleId.replace(">", "");
+
+              if (!isNaN(RoleId)) {
+
+                  if (typeof message.guild.roles.cache.get(RoleId) !== 'undefined') {
+
+                    Client.config.moderatorRoles.push(`${RoleId}`);
+
+                    message.channel.send("Dodano do ról moderatorskich!");
+
+                  } else {
+                      message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+                  }
+
+              } else {
+                  message.channel.send("Spinguj lub podaj prawidłowe id roli!");
+              }
+
             }
-
-            var RoleId = message.content.slice(3);
-            RoleId = RoleId.replace(">", "");
-
-            if (!isNaN(RoleId)) {
-
-                if (typeof message.guild.roles.cache.get(RoleId) !== 'undefined') {
-
-                  Client.config.moderatorRoles.push(`${RoleId}`);
-
-                  message.channel.send("Dodano do ról moderatorskich!");
-
-                } else {
-                    message.channel.send("Spinguj lub podaj prawidłowe id roli!");
-                }
-
-            } else {
-                message.channel.send("Spinguj lub podaj prawidłowe id roli!");
-            }
-
         }
     }
     Client.reloadConfig();
