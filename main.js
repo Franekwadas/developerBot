@@ -32,7 +32,7 @@ Client.once('ready', () => {
 Client.on('message', message => {
 
 
-    if (message.content.toLowerCase() == "developerbotsetup" && typeof config === 'undefined' && !message.author.bot) {
+    if (message.content.toLowerCase() == "developerbotsetup" && typeof  Client.config === 'undefined' && !message.author.bot) {
 
         Client.configFile.push({
 
