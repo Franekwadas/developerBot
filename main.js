@@ -60,11 +60,9 @@ Client.on('message', message => {
         return;
     }
 
-    Client.config = Client.configFile.find(g => g.guildId == message.guild.id);
-
     if (typeof Client.config === 'undefined') {
 
-      if (message.member.permissions.has('MENAGE_GUILD')) {
+      if (message.member.hasPermission('MENAGE_GUILD')) {
 
         message.author.send("Witaj przyszedłem poinformować cię o niezkonfigurowanym bocie na serverze: " + message.guild.name);
         return;
