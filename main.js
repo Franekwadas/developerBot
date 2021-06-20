@@ -63,9 +63,11 @@ Client.on('message', async message => {
           } 
 
           return;
-      }
+      }  
 
       Client.config = Client.configFile.find(p => p.guildId == message.guild.id);
+
+      Client.prefix = Client.config.prefix;
 
       if (typeof Client.config === 'undefined') {
         message.author.send(`Witaj przyszedłem poinformować cię o nieskonfigurowanym bocie na serverze: ${message.guild.name}, aby to naprawić na serverze wpisz developerbotsetup bez prefixu`)
