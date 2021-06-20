@@ -19,10 +19,10 @@ for (const file of commandFiles) {
 Client.once('ready', () => {
 
   Client.reloadConfig();
-  console.log("[==---------Running bot---------==]");
-  console.log("🤖・Application id: 849922535323729960");
-  console.log(`📊・Version: ${Client.package.version}`);
-  console.log(`🔧・Author: ${Client.package.author}`);
+  console.log("[==---------Running bot---------==]\n");
+  console.log("🤖 ・Application id: 849922535323729960");
+  console.log(`📊 ・Version: ${Client.package.version}`);
+  console.log(`🔧 ・Author: ${Client.package.author}\n`);
   console.log(`[==-----------------------------==]`);
 
   Client.user.setActivity("Prefix: d/", "LISTENING");
