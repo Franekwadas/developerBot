@@ -320,6 +320,5 @@ Client.reloadConfig = () => {
     fs.writeFileSync('./punishments.json', JSON.stringify(punishments));
 }
 
-//keepAlive();
-//Client.login(process.env['TOKEN']);
-Client.login('ODQ5OTIyNTM1MzIzNzI5OTYw.YLiOCw.0B5F3_45jMNkSQBiUCn8RiOpokc');
+keepAlive();
+Client.login(process.env['TOKEN']);
