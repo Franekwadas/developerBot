@@ -60,6 +60,19 @@ Client.on('message', message => {
         return;
     }
 
+    Client.config = Client.configFile.find(g => g.guildId == message.guild.id);
+
+    if (typeof Client.config === 'undefined') {
+
+      if (message.member.permissions.has('MENAGE_GUILD')) {
+
+        message.author.send("Witaj przyszedłem poinformować cię o niezkonfigurowanym bocie na serverze: " + message.guild.name);
+        return;
+
+      }
+
+    }
+
     if (Client.config.inConfiguration == true && !message.author.bot) {
         if (message.author.id != Client.config.whoConfigurating) return;
         if (typeof Client.config.channelForRekrutation === 'undefined' || Client.config.channelForRekrutation == "") {

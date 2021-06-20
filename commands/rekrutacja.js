@@ -25,6 +25,13 @@ module.exports = {
             message.channel.send("Nie masz wystarczających uprawnień!");
             return;
         }
+
+        if (typeof config.channelForRekrutation === "false" || typeof config.rekrutationRole === "false") {
+
+            message.channel.send("Przykro mi ale ta komenda nie jest skonfigurowana: d/resetconfig i na nowo skonfiguruj developer bota");
+            return;
+
+        }
         
         if (typeof args[0] !== 'undefined') {
 
