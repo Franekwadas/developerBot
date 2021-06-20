@@ -35,6 +35,8 @@ Client.on('message', async message => {
     if (message.author.bot) return;
     if (message.channel.type == "dm") return;
 
+    Client.config = Client.configFile.find(g => g.guildId == message.guild.id);
+
     var punishments1 = Client.punishmentsFile.find(g => g.guildId == message.guild.id);
 
     if (typeof punishments1 === 'undefined') {
@@ -51,11 +53,34 @@ Client.on('message', async message => {
     var punishments = Client.punishmentsFile.find(g => g.guildId == message.guild.id); 
 
     if (typeof punishments.mutes.find(u => u.userId == message.author.id) !== 'undefined') {
-      message.channel.messages.cache.get(message.id).delete();
-      return;
-    }
+      if(typeof Client.config !== 'undefined') {
+         Client.prefix = Client.config.prefix;
+      } else {
+        message.channel.messages.cache.get(message.id).delete();
+        return;
+      }
+      if (message.content.startsWith(Client.prefix)) {
+        if (Client.config.moderatorRoles.length <= 0) {
+          return;
+        }
 
-    Client.config = Client.configFile.find(g => g.guildId == message.guild.id);
+        var hasPermission = false;
+
+        Client.config.moderatorRoles.forEach(role => {
+
+          if (message.member.roles.cache.has(role)) {
+              hasPermission = true;
+          }
+
+        });
+
+      }
+
+      if (hasPermission != true) {
+        message.channel.messages.cache.get(message.id).delete();
+        return;
+      }
+    }
 
     if (message.member.permissions.has('MANAGE_GUILD')) {
       if (message.content.toLowerCase() == "developerbotsetup" && typeof  Client.config === 'undefined' && !message.author.bot) {

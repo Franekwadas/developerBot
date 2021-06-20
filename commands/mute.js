@@ -27,8 +27,6 @@ module.exports = {
             return;
         }
 
-        client.reloadConfig();
-
         var punishments = client.punishmentsFile.find(g => g.guildId == message.guild.id); 
 
         if (typeof args[0] !== 'undefined') {
@@ -89,7 +87,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setColor('#fc1c03')
                 .setTitle('Wykonano!')
-                .setDescription(`**Wyciszono gracza** <@${id}>\n**Powód:** ${reason}`)
+                .setDescription(`**Wyciszono gracza** <@${id}>\n**Powód nie został podany!**`)
                 .setFooter('Polecam się na przyszłość!')
 
             message.channel.send(embed);
@@ -106,7 +104,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setColor('#fc1c03')
                 .setTitle('Wykonano!')
-                .setDescription(`**Wyciszono gracza** <@${id}>\n**Powód nie został podany!**`)
+                .setDescription(`**Wyciszono gracza** <@${id}>\n**Powód:** ${reason}`)
                 .setFooter('Polecam się na przyszłość!')
 
             message.channel.send(embed);
