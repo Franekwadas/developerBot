@@ -29,10 +29,11 @@ Client.once('ready', () => {
 
 })
 
-Client.on('message', message => {
+Client.on('message', async message => {
 
+    if (message.author.bot) return;
+    if (message.channel.type == "dm") return;
     if (message.member.permissions.has('MANAGE_GUILD')) {
-
       if (message.content.toLowerCase() == "developerbotsetup" && typeof  Client.config === 'undefined' && !message.author.bot) {
 
           Client.configFile.push({
@@ -61,8 +62,10 @@ Client.on('message', message => {
           return;
       }
 
+      Client.config = Client.configFile.find(p => p.guildId == message.guild.id);
+
       if (typeof Client.config === 'undefined') {
-        message.author.send(`Witaj przyszedłem poinformować cię o niezkonfigurowanym bocie na serverze: ${message.guild.name}, aby to naprawić na serverze wpisz developerbotsetup bez prefixu`)
+        message.author.send(`Witaj przyszedłem poinformować cię o nieskonfigurowanym bocie na serverze: ${message.guild.name}, aby to naprawić na serverze wpisz developerbotsetup bez prefixu`)
         return;
       }
 
@@ -197,15 +200,21 @@ Client.on('message', message => {
 
             }
         }
+        if (typeof Client.config === 'undefined') return;
+        Client.reloadConfig();
+        if (Client.config.inConfiguration == true && Client.whoConfigurating == message.author.id) {
+          return;
+       }
     }
-    Client.reloadConfig();
-    if (Client.config.inConfiguration == true && Client.whoConfigurating == message.author.id) {
-      return;
-    }
+    
     
 
     Client.config = Client.configFile.find(p => p.guildId == message.guild.id);
-    Client.prefix = Client.config.prefix;
+    if (typeof Client.prefix !== 'undefined') {
+      Client.prefix = Client.config.prefix;
+    } else {
+      return;
+    }
 
     if (!message.content.startsWith(Client.prefix) && !message.author.bot) {
         recrutationHandler(message, Client);
@@ -254,3 +263,4 @@ Client.reloadConfig = () => {
 
 keepAlive();
 Client.login(process.env['TOKEN']);
+//Client.login("ODQ5OTIyNTM1MzIzNzI5OTYw.YLiOCw.oTT6QpzG9sSZIAuFkiZaclViLyY");

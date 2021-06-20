@@ -4,9 +4,9 @@ module.exports = (message, client) => {
 
     if (typeof client.config === 'undefined') return;
 
-    var acctualRekruFile = client.acctualRekru.find(g => g.guildId == message.guild.id);
+    var acctualRekruFile1 = client.acctualRekru.find(g => g.guildId == message.guild.id);
     
-    if (typeof acctualRekruFile === 'undefined') {
+    if (typeof acctualRekruFile1 === 'undefined') {
 
       client.acctualRekru.push({
         "guildId": message.guild.id,
@@ -18,6 +18,8 @@ module.exports = (message, client) => {
       client.reloadConfig();
 
     }
+
+    var acctualRekruFile = client.acctualRekru.find(g => g.guildId == message.guild.id);
 
     var thisRecrutation = acctualRekruFile.acctualRekrutation.find(r => r.channelId == message.channel.id);
 
