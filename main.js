@@ -233,7 +233,7 @@ Client.on('message', async message => {
 
     } catch (error) {
 
-        message.channel.send(`Przykro mi ale nie znam takiej komendy. Jeśli chcesz zobaczyć moją liste komend wpisz ${Client.prefix}komendy.`);
+        message.channel.send(`Przykro mi ale nie znam takiej komendy. Jeśli chcesz zobaczyć moją liste komend wpisz ${Client.prefix}info -komendy.`);
 
         console.log(error);
     }
