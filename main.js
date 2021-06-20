@@ -61,7 +61,10 @@ Client.on('message', message => {
           return;
       }
 
-      if (typeof Client.config === 'undefined') return;
+      if (typeof Client.config === 'undefined') {
+        message.author.send(`Witaj przyszedłem poinformować cię o niezkonfigurowanym bocie na serverze: ${message.guild.name}, aby to naprawić na serverze wpisz developerbotsetup bez prefixu`)
+        return;
+      }
 
       if (Client.config.inConfiguration == true && !message.author.bot) {
           if (message.author.id != Client.config.whoConfigurating) return;
