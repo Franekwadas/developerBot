@@ -172,6 +172,7 @@ Client.on('message', async message => {
                   
                   Client.config.inConfiguration = false;
                   Client.config.setingModeratorRoles = false;
+                  Client.reloadConfig();
                   return;
                 } catch (error) {
                   console.error(error);
@@ -263,4 +264,3 @@ Client.reloadConfig = () => {
 
 keepAlive();
 Client.login(process.env['TOKEN']);
-//Client.login("ODQ5OTIyNTM1MzIzNzI5OTYw.YLiOCw.oTT6QpzG9sSZIAuFkiZaclViLyY");
