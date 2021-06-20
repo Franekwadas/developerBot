@@ -1,1 +1,25 @@
-[{"guildId":"852199893627437158","nextId":"2","acctualRekrutation":[],"waitingForCheck":[{"userId":"852211823637954621","name":"maciek","age":13,"why":"Bo tak","interests":"Nie wiem a twoje?","gameExperience":"W czym?","id":"1","showAtWnioski":false}]},{"guildId":"854387205900468264","nextId":1,"acctualRekrutation":[],"waitingForCheck":[]}]
+[
+  {
+    "guildId": "852199893627437158",
+    "nextId": "2",
+    "acctualRekrutation": [],
+    "waitingForCheck": [
+      {
+        "userId": "852211823637954621",
+        "name": "maciek",
+        "age": 13,
+        "why": "Bo tak",
+        "interests": "Nie wiem a twoje?",
+        "gameExperience": "W czym?",
+        "id": "1",
+        "showAtWnioski": false
+      }
+    ]
+  },
+  {
+    "guildId": "854387205900468264",
+    "nextId": 1,
+    "acctualRekrutation": [],
+    "waitingForCheck": []
+  }
+]
